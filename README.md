@@ -51,3 +51,24 @@ func main() {
 
 }
 ```
+
+## Reading a file and decoding it using json
+
+FileReader reads a file content and returns it as a slice of bytes. If a
+Decoder is present(as for example a json decoder), the content is also
+sent to the decoder. See example below
+
+```go
+
+allTasks := make([]task.Task, 0)
+jdec := jsondec.New(
+	jsondec.WithTarget(&allTasks),
+)
+freader := filereader.New(
+	filereader.WithFilePath("/path/to/json/file/with/tasks.json"),
+	filereader.WithDecoder(&jdec),
+)
+
+rawContent, err := freader.Parse()
+// allTasks now contains all content of the file parsed as task.Task struct
+```
