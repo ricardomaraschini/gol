@@ -95,7 +95,7 @@ func main() {
 
 	body := new(Body)
 	bodyDecoder := jsondec.New(
-		jsondec.WithTarget(&body),
+		jsondec.WithTarget(body),
 	)
 
 	c := httpc.New(
