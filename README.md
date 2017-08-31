@@ -10,7 +10,13 @@ import (
 	"fmt"
 	"github.com/ricardomaraschini/gol/cmdline/parameters"
 	"github.com/ricardomaraschini/gol/cmdline/parser"
+	"log"
 )
+
+func usage() {
+	// print usage
+	fmt.Println("usage")
+}
 
 func main() {
 
@@ -18,14 +24,14 @@ func main() {
 		parameters.WithName("server"),
 	)
 
-	unit := parameters.NewString(
-		parameters.WithName("unit"),
+	flag := parameters.NewBool(
+		parameters.WithName("verbose"),
 	)
 
 	cparser := parser.CmdLineParser{}
 	err := cparser.AddParameters(
 		&server,
-		&unit,
+		&flag,
 	)
 	if err != nil {
 		log.Fatal(err)
@@ -33,13 +39,13 @@ func main() {
 	cparser.Parse()
 
 	// values not provided through command line
-	if server.Value == "" || unit.Value == "" {
+	if server.Value == "" || flag.Value == false {
 		usage()
 		return
 	}
 
 	fmt.Printf("server is %s\n", server.Value)
-	fmt.Printf("unit is %s\n", unit.Value)
+	fmt.Printf("verbose is %v\n", flag.Value)
 
 }
 ```
