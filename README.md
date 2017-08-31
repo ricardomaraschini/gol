@@ -47,5 +47,7 @@ func main() {
 	fmt.Printf("server is %s\n", server.Value)
 	fmt.Printf("verbose is %v\n", flag.Value)
 
+	// app --verbose --server=serveraddr
+
 }
 ```
