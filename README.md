@@ -1,4 +1,4 @@
-# gol
+# gol - my GO Library
 Some Go libraries for personal usage
 
 ## Command line parameters
