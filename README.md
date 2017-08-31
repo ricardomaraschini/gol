@@ -3,7 +3,7 @@ Some Go libraries for personal usage
 
 ## Command line parameters
 
-```
+```go
 package main
 
 import (
