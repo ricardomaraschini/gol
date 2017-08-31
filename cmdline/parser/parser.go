@@ -20,6 +20,15 @@ type CmdLineParser struct {
 	BoolParams   []Parameter
 }
 
+// New returns a new CmdLineParser setting all optionals passed in
+func New(opts ...Optional) CmdLineParser {
+	c := CmdLineParser{}
+	for _, o := range opts {
+		o(&c)
+	}
+	return c
+}
+
 // AddParameters adds a parameter to be parsed from the command line
 func (c *CmdLineParser) AddParameters(pars ...Parameter) error {
 

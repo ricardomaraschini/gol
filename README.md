@@ -28,14 +28,10 @@ func main() {
 		parameters.WithName("verbose"),
 	)
 
-	cparser := parser.CmdLineParser{}
-	err := cparser.AddParameters(
-		&server,
-		&flag,
+	cparser := parser.New(
+		parser.WithParam(&server),
+		parser.WithParam(&flag),
 	)
-	if err != nil {
-		log.Fatal(err)
-	}
 	cparser.Parse()
 
 	// values not provided through command line
