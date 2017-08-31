@@ -72,3 +72,44 @@ freader := filereader.New(
 rawContent, err := freader.Parse()
 // allTasks now contains all content of the file parsed as task.Task struct
 ```
+
+## Requesting http and decoding result
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/ricardomaraschini/gol/httpc"
+	"github.com/ricardomaraschini/gol/jsondec"
+)
+
+type Body struct {
+	Origin string `json:"origin"`
+	URL    string `json:"url"`
+}
+
+func main() {
+
+	body := new(Body)
+	bodyDecoder := jsondec.New(
+		jsondec.WithTarget(&body),
+	)
+
+	c := httpc.New(
+		httpc.WithDecoder(&bodyDecoder),
+	)
+
+	raw, err := c.Get("https://httpbin.org/get")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(raw))
+	fmt.Println(body.URL)
+	fmt.Println(body.Origin)
+}
+
+```
